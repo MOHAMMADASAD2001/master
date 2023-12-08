@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\Review;
 use App\Http\Requests\UpdateReviewRequest;
 use Illuminate\Support\Facades\Auth;
@@ -18,8 +19,12 @@ class ReviewController extends Controller
     public function index()
     {
 
-;
+        $reviews = Review::all();
+
+        return view('dashboard.review' ,  compact('reviews'));
+
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -87,8 +92,12 @@ class ReviewController extends Controller
      * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Review $review)
-    {
-        //
-    }
+  
+     public function destroy($id)
+     {
+        Review::find($id)->delete();
+        Review::destroy($id);
+         return redirect('reviewdash')->with('flash_message', 'Review deleted successfully');
+     }
+ 
 }

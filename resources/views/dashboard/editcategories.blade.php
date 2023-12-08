@@ -31,7 +31,6 @@
     
             <div class="admin-form-group">
                 @if ($category->image)
-                <img src="{{ asset('img/' . $category->image) }}" alt="Existing Image" width="100" height="100"><br>
                 @endif
                 <!-- Allow uploading a new image -->
                 <label class="admin-label" for="image">Image:</label>

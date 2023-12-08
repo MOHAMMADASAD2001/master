@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Order;
-use App\Http\Requests\StoreOrderRequest;
+use App\Models\Cart;
+use \Illuminate\Http\Request;
 use App\Http\Requests\UpdateOrderRequest;
-use App\Models\Product;
+use Carbon\Carbon;
 
 class OrderController extends Controller
 {
@@ -16,14 +18,26 @@ class OrderController extends Controller
      */
     public function index()
     {
-        // $products = Product::all(); // Assuming you have a Product model
-
-        // return view('pages.checkout', compact('products'));
-        // Fetch cart items or relevant data
-        $cartItems = []; // Fetch cart items from your system
-
-        return view('pages/checkout', compact('cartItems'));
+        $order = Order::all();
+        return view('dashboard.order', compact('order'));
     }
+    public function checkout()
+    {
+        $cartItems = Cart::with('product')->get();
+        $subtotal = 0;
+
+        foreach ($cartItems as $cartItem) {
+            $subtotal += $cartItem->product->price * $cartItem->quantity;
+        }
+
+        $shippingCost = $subtotal > 50 ? 0 : 3;
+        $total = $subtotal + $shippingCost;
+
+
+        return view('pages.checkout', compact('cartItems', 'total'));
+    }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -32,19 +46,37 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreOrderRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreOrderRequest $request)
+
+
+    public function store(Request $request)
     {
-        //
+
+
+        $order = new Order();
+        $order->user_id = $request->userId;
+        $order->orderAddress = $request->city . ', ' . $request->houseadd . ', ' . $request->apartment;
+        $order->orderStatus = 'pending';
+        $order->orderDate = Carbon::now();
+        $order->totalPrice = $request->totalPrice;
+
+        // Check the payment method and set orderPayment accordingly
+        if ($request->dbt === 'cd') {
+            $order->orderPayment = 'Cash on Delivery';
+        } elseif ($request->dbt === 'paypal') {
+            $order->orderPayment = 'Paid via Paypal';
+        } else {
+            // Handle other payment methods if needed
+            $order->orderPayment = 'Other Payment Method';
+        }
+        Cart::truncate();
+        $order->save();
+        // return redirect('/thankyou')->with('success', 'Order placed successfully!');
+        return redirect('/')->with('success', 'Order placed successfully!');
     }
+
 
     /**
      * Display the specified resource.
@@ -63,9 +95,10 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function edit(Order $order)
+    public function edit($id)
     {
-        //
+        $order = Order::find($id);
+        return view('dashboard.editorder', compact('order'));
     }
 
     /**
@@ -75,10 +108,25 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateOrderRequest $request, Order $order)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'orderStatus' => 'required|in:pending,on_way,delivered',
+            // Add other validation rules if needed
+        ]);
+
+        $order = Order::find($id);
+
+        if (!$order) {
+            return redirect()->route('orderdash')->with('error', 'Order not found');
+        }
+
+        $order->orderStatus = $request->orderStatus;
+        $order->save();
+        return redirect('orderdash')->with('success', 'Order updated successflly');
+
     }
+
 
     /**
      * Remove the specified resource from storage.

@@ -9,7 +9,7 @@
           <a href="{{ route('productdash.create') }}" class="add-user-button">Add Product</a> 
                </section>
       
-               <table class="table">
+               <table class="table display" id="datatable">
                 <thead>
             <tr>
               <th>Product ID</th>

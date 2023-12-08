@@ -1,3 +1,56 @@
+      .page-heading {
+          padding: 210px 0px 130px 0px;
+          text-align: center;
+          background-position: center center;
+          background-repeat: no-repeat;
+          background-size: cover;
+      }
+
+      .page-heading .text-content h4 {
+          color: #f33f3f;
+          font-size: 22px;
+          text-transform: uppercase;
+          font-weight: 700;
+          margin-bottom: 15px;
+      }
+
+      .page-heading .text-content h2 {
+          color: #fff;
+          font-size: 62px;
+          text-transform: uppercase;
+          letter-spacing: 5px;
+      }
+
+      .page-heading .text-content h4 {
+          font-size: 22px;
+      }
+
+      .page-heading .text-content h2 {
+          font-size: 36px;
+          letter-spacing: 0.5px;
+      }
+
+      .about-heading {
+          background-image: url(../images/b3.jpg);
+      }
+
+      .page-heading .text-content h4 {
+          color: #3b4a6b;
+          font-size: 22px;
+          text-transform: uppercase;
+          font-weight: 700;
+          margin-bottom: 15px;
+      }
+
+      .page-heading .text-content h2 {
+          color: #fff;
+          font-size: 62px;
+          text-transform: uppercase;
+          letter-spacing: 5px;
+      }
+
+
+
 .container {
     position: relative;
 }
@@ -52,7 +105,7 @@
     justify-content: center;
     border: 2px solid rgba(255, 255, 255, .1);
     border-radius: 50%;
-    backdrop-filter: blur(15px);
+    /* backdrop-filter: blur(15px); */
     background: rgba(255, 255, 255, .05);
     box-shadow: 0 0 30px rgba(0, 0, 0, .2);
 }
@@ -110,7 +163,7 @@
     position: absolute;
     width: 8px;
     height: 80px;
-    background: #ff3d68;
+    background: #bc9864;
     z-index: 10;
     border-radius: 10px;
 }
@@ -120,7 +173,7 @@
     position: absolute;
     width: 4px;
     height: 90px;
-    background: #39a2db;
+    background: #3b4a6b;
     z-index: 11;
     border-radius: 8px;
 }

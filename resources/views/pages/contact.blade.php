@@ -1,4 +1,4 @@
-@section('css', 'css/clock.css')
+@section('css', 'css/clock2.css')
 
 @section('title','contact')
 
@@ -6,7 +6,7 @@
 @section('content')
 
 <!-- clock start  -->
-<div class="container d-flex justify-content-center align-items-center ">
+{{-- <div class="container d-flex justify-content-center align-items-center ">
   <div class="img-box" style="justify-content: center;">
     <div class="container" >
 
@@ -27,6 +27,9 @@
 
   </div>
   </div>
+  </div> --}}
+   <div class="clock" >
+  <div id="MyClockDisplay" class="clock1" onload="showTime()"></div>
   </div>
 <!-- clock end -->
   <!-- contact section -->
@@ -44,8 +47,7 @@
            <form class="custom-form contact-form" action="{{ url('store-contacts') }}" method="post"
                         role="form">
                         @csrf
-                        <h2>Contact form</h2>
-
+                        
                         {{-- <p class="mb-4">Or, you can just send an email:
                             <a href="#">info@charity.org</a>
                         </p> --}}
@@ -93,7 +95,7 @@
                             <span class="text-danger">{{ $errors->first('message') }}</span>
                         @endif
 
-                        <button type="submit" class="form-control">Send Message</button>
+                        <button type="submit" class="send-message" >Send Message</button>
                     </form>
           </div>
         </div>
@@ -107,5 +109,5 @@
   </section>
 
   <!-- end contact section -->
-@section('js', 'js/clock.js')
+@section('js', 'js/clock2.js')
   @endsection

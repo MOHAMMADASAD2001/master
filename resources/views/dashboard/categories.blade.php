@@ -19,7 +19,7 @@
    
     </section>
   
-    <table class="table">
+    <table class="table display" id="datatable">
       <thead>
         <tr>
           <th>Category ID</th>

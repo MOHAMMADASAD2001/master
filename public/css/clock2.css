@@ -1,0 +1,23 @@
+.clock1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #bc9864;
+    font-size: 60px;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 7px;
+}
+.clock {
+    width: 350px;
+    height: 350px;
+    display: flex;
+    /* flex-wrap: nowrap; */
+    align-items: center;
+    justify-content: center;
+    /* border: 2px solid rgba(255, 255, 255, .1); */
+    /* border-radius: 50%; */
+    /* backdrop-filter: blur(15px); */
+    /* background: rgba(255, 255, 255, .05); */
+    /* box-shadow: 0 0 30px rgba(0, 0, 0, .2); */
+}

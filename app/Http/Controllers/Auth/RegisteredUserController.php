@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Redirect;
 
 class RegisteredUserController extends Controller
 {
@@ -20,6 +21,8 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
+        redirect::setIntendedUrl(url()->previous());
+
         return view('auth.register');
     }
 
@@ -46,8 +49,8 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-       return redirect(RouteServiceProvider::HOME);
+        return redirect()->intended(RouteServiceProvider::HOME);
 
-      // return redirect('verify-email');
+        // return redirect('verify-email');
     }
 }

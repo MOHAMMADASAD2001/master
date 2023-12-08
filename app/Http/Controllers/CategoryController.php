@@ -125,4 +125,6 @@ class CategoryController extends Controller
         Category::destroy($id);
         return redirect('categorydash')->with('success','category deleted successfully');
     }
+
+    
 }

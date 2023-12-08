@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\DB; // Import the DB facade
 use Illuminate\Http\Request;
 use App\Models\Cart;
@@ -9,12 +10,17 @@ use App\Models\Product; // Import the Product model
 
 class CartController extends Controller
 {
+
     public function index()
     {
-        // Retrieve and display the cart items from the database or session
-        $cartItems = Cart::all(); // Adjust this to your cart storage logic
-        return view('cart.index', ['cartItems' => $cartItems]);
+        // Retrieve cart items with their corresponding product details
+        $cartItems = Cart::all();
+        $productIds = $cartItems->pluck('product_id')->toArray();
+        $products = Product::whereIn('id', $productIds)->get();
+
+        return view('dashboard.cart', ['cartItems' => $cartItems, 'products' => $products]);
     }
+
 
     public function addToCart(Request $request)
     {
@@ -36,7 +42,6 @@ class CartController extends Controller
                 'product_id' => $product_id,
                 'product_name' => $product_name,
                 'quantity' => 1,
-                'user_id' => 1,
                 'price' => $product_price,
             ]);
         }
@@ -60,12 +65,9 @@ class CartController extends Controller
     {
         // Retrieve cart items (adjust this to your cart storage logic)
         $cartItems = Cart::all();
-    
-        // Retrieve product data based on the product IDs in the cart
+
         $productIds = $cartItems->pluck('product_id')->toArray();
         $products = DB::table('products')->whereIn('id', $productIds)->get();
-    
-        // Pass both cart items and product data to the view
         return view('pages.cart', ['cartItems' => $cartItems, 'products' => $products]);
 
     }
@@ -128,27 +130,14 @@ class CartController extends Controller
     {
         // Find the cart item by its ID
         $cartItem = Cart::find($id);
-    
+
         if ($cartItem) {
             // Delete the cart item
             $cartItem->delete();
-            
+
             // Optionally, you can return a response or redirect back
             return redirect('cart')->with('success', 'Item deleted successfully');
-        }}
-    // public function removeProduct(Request $request, $id)
-    // {
-    //     // Implement the logic to remove the product from the cart here
-    //     // You can use session, database, or any cart management system you prefer
-
-    //     // Example using Laravel session to manage the cart
-    //     $cart = $request->session()->get('cart', []);
-
-    //     if (array_key_exists($product_id, $cart)) {
-    //         unset($cart[$product_id]);
-    //         $request->session()->put('cart', $cart);
-    //     }
-
-    //     return redirect()->back()->with('success', 'Product removed from the cart.');
-    // }
+        }
+    }
+   
 }

@@ -24,7 +24,8 @@
   <link href="{{ asset('assets/vendor/quill/quill.snow.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
   <link href="{{ asset('assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
-  <link href="{{ asset('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
   
   <!-- Template Main CSS File -->
   <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
@@ -38,77 +39,32 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="/homedash" class="logo d-flex align-items-center">
         <!-- <img src="assets/img/logo.png" alt=""> -->
-        <span class="d-none d-lg-block">VAPERS</span>
+        <span class="d-none d-lg-block">MAD WATCH</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
 
    
 
-    <nav class="header-nav ms-auto">
+    <nav class="header-nav ms-auto" style="margin-left: auto; padding-right: 10px; display: flex; align-items: center;">
 
-
-        <li class="nav-item dropdown pe-3">
-
-          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">H. Refaie</span>
-          </a><!-- End Profile Iamge Icon -->
-
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-            <li class="dropdown-header">
-              <h6>Hasan Refaie</h6>
-              <span>Web Designer</span>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-person"></i>
-                <span>My Profile</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-gear"></i>
-                <span>Account Settings</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Sign Out</span>
-              </a>
-            </li>
-
-          </ul><!-- End Profile Dropdown Items -->
-        </li><!-- End Profile Nav -->
-
-      </ul>
-    </nav><!-- End Icons Navigation -->
-
+      <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown" style="margin-right: 10px;">
+        {{-- <img src={{ url('/images/'.Auth::user()->image) }} alt="Profile" class="rounded-circle" style="margin-right: 5px; width: 40px; height: 40px;"> --}}
+        @if(session('loginname'))
+              <span style="color: black; font-weight: bold;">{{ session('loginname') }}</span>
+          @endif
+      </a>
+  
+      <form action="{{ route('adminlogout') }}" method="POST" style="margin-right: 10px;">
+          @csrf <!-- Include CSRF token -->
+          <button type="submit" class="btn btn-primary">Log out</button>
+      </form>
+  
+  </nav>
+  
+  
   </header><!-- End Header -->
 
   <!-- ======= Sidebar ======= -->
@@ -147,14 +103,20 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link " href="order.html">
+        <a class="nav-link " href="cartdash">
+          <i class="bi bi-people"></i>
+          <span>Cart</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="orderdash">
           <i class="bi bi-people"></i>
           <span>Orders</span>
         </a>
       </li>
       
       <li class="nav-item">
-        <a class="nav-link " href="review.html">
+        <a class="nav-link " href="reviewdash">
           <i class="bi bi-people"></i>
           <span>Reviews</span>
         </a>

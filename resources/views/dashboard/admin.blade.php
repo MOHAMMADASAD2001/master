@@ -4,51 +4,42 @@
     <div class="content-wrapper">
         <section class="user-section">
           <h2>Admin lists</h2>
-          <button class="add-user-button">Add Admin</button>
+          <a href="{{ route('admindash.create') }}" class="add-user-button">Add Admin</a>
         </section>
       
-        <table class="table">
+        <table class="table display" id="datatable">
           <thead>
             <tr>
               <th>Admin ID</th>
+              <th>Image</th>
               <th>Admin Name</th>
               <th>Admin email</th>
-              <th>Admin password</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
+            @foreach($admin as $item)
             <tr>
-              <td>1</td>
-              <td>h</td>
-              <td>Devices</td>
-              <td>lorem ipusm dolo</td>
-              <td class="action-buttons">
-                <button class="delete-button">Delete</button>
-                <button class="edit-button">Edit</button>
+              
+                <td>{{ $item->id }}</td>
+             
+                <td>
+                  <img src="{{ $item->image}}" alt="{{ $item->name }} Image" width="100">
               </td>
+                </td>
+                
+                <td>{{ $item->name }}</td>
+                <td>{{ $item->email }}</td>
+                <td class="action-buttons">
+                  <form method="POST" action="{{ url('/admindash' . '/' . $item->id  ) }}" style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-m" onclick="return confirm('Confirm Delete?')">Delete</button>
+                </form>
+                    <a  class="btn btn-success" href="{{ route('admindash.edit',$item->id)}}"> Edit </a>
+                  </td>
             </tr>
-            <tr>
-                <td>2</td>
-                <td>John Doe</td>
-                <td>john@example.com</td>
-                <td>123-456-7890</td>
-                <td class="action-buttons">
-                  <button class="delete-button">Delete</button>
-                  <button class="edit-button">Edit</button>
-                </td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>John Doe</td>
-                <td>john@example.com</td>
-                <td>123-456-7890</td>
-                <td class="action-buttons">
-                  <button class="delete-button">Delete</button>
-                  <button class="edit-button">Edit</button>
-                </td>
-              </tr>
-            <!-- Add more rows here -->
+            @endforeach  
           </tbody>
         </table>
         

@@ -25,7 +25,9 @@
   .clock .min,
   .clock .sec {
     position: absolute;
+    
   }
+  
   
   .clock .hour, .hr {
     width: 160px;

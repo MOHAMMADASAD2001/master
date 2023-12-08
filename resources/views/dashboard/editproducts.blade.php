@@ -61,7 +61,6 @@
     
             <div class="admin-form-group">
                 @if ($product->image)
-                <img src="{{ asset('img/' . $product->image) }}" alt="Existing Image" width="100" height="100"><br>
                 @endif
                 <!-- Allow uploading a new image -->
                 <label class="admin-label" for="image">Image:</label>

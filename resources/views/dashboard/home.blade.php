@@ -39,7 +39,7 @@
                       <i class="bi bi-people"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>145</h6>
+                      <h3>{{ count($users ?? []) }}<sup style="font-size: 20px"></sup></h3>
 
                     </div>
                   </div>
@@ -64,14 +64,15 @@
                       <i class="bi bi-cart"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>3</h6>
+                      <h3>{{count($categories ?? []) }}<sup style="font-size: 20px"></sup></h3>
 
                     </div>
                   </div>
                 </div>
 
               </div>
-            </div><!-- End Revenue Card -->
+            </div>
+            
 
             <!-- Customers Card -->
             <div class="col-xxl-4 col-xl-12">
@@ -90,7 +91,7 @@
                       <i class="bi bi-shop"></i>
                     </div>
                     <div class="ps-3">
-                      <h6>50</h6>
+                      <h3>{{count($products ?? []) }}<sup style="font-size: 20px"></sup></h3>
 
                     </div>
                   </div>

@@ -5,6 +5,19 @@
 @extends('layout.master')
 @section('content')
 
+
+ <div class="page-heading about-heading header-text">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-content">
+                        <h4>about us</h4>
+                        <h2>MAD WATCH</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
  <!-- about section -->
 
   <section class="about_section layout_padding">
@@ -52,7 +65,7 @@
           <div class="detail-box">
             <div class="heading_container">
               <h2 style="color:#3b4a6b ;">
-                About Us
+                About MAD
               </h2>
             </div>
             <p>

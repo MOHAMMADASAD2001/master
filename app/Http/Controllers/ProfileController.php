@@ -9,8 +9,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\User;
+use App\Models\Order;
+
 class ProfileController extends Controller
 {
+    public function pro()
+    {
+        $order = Order::all();
+        return view('dashboard', compact('order'));
+    }
     /**
      * Display the user's profile form.
      */
@@ -26,7 +33,7 @@ class ProfileController extends Controller
     {
         $user = $request->input('userData');
 
-       if ($request->hasFile("image")) {
+        if ($request->hasFile("image")) {
             // Handle the update of the image
             $image = $request->file("image");
             $imageName = time() . '.' . $image->getClientOriginalExtension();
